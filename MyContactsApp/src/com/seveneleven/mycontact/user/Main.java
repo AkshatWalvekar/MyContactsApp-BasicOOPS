@@ -78,5 +78,61 @@ public class Main {
         }else {
         	System.out.println("Invalid Credentials !");
         }
+        
+        //UC3: Profile Management
+        
+        if (loggedInUser != null) {
+
+            System.out.println("\nPROFILE MANAGEMENT");
+
+            System.out.println("1. Update Username");
+            System.out.println("2. Update Email");
+            System.out.println("3. Change Password");
+            System.out.print("Choose option: ");
+
+            int choice = sc.nextInt();
+            sc.nextLine();
+
+            switch (choice) {
+
+                case 1:
+                    System.out.print("Enter new username: ");
+                    String newUsername = sc.nextLine();
+                    loggedInUser.setUsername(newUsername);
+                    System.out.println("Username updated!");
+                    break;
+
+                case 2:
+                    System.out.print("Enter new email: ");
+                    String newEmail = sc.nextLine();
+
+                    if (EmailValidator.isValid(newEmail)) {
+                        loggedInUser.setEmail(newEmail);
+                        System.out.println("Email updated!");
+                    } else {
+                        System.out.println("Invalid Email!");
+                    }
+                    break;
+
+                case 3:
+                    System.out.print("Enter new password: ");
+                    String newPassword = sc.nextLine();
+
+                    if (PasswordValidator.isValid(newPassword)) {
+                        loggedInUser.setPassword(newPassword);
+                        System.out.println("Password changed!");
+                    } else {
+                        System.out.println("Weak Password!");
+                    }
+                    break;
+
+                default:
+                    System.out.println("Invalid choice!");
+            }
+
+            // Show updated details
+            System.out.println("\nUpdated Profile:");
+            loggedInUser.display();
+        }
     }
 }
