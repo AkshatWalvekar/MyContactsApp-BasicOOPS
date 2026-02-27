@@ -91,7 +91,8 @@ public class Main {
             System.out.println("1. Profile Management");
             System.out.println("2. Create Contact");
             System.out.println("3. View Contact");
-            System.out.println("4. Exit");
+            System.out.println("4. Edit Contact");
+            System.out.println("5. Exit");
             System.out.print("Choose option: ");
 
             int mainChoice = sc.nextInt();
@@ -231,9 +232,75 @@ public class Main {
 
                 	    break;
                 	    
+                // Edit contacts feature
+                case 4:
+
+                    System.out.println("\nEDIT CONTACT");
+
+                    if (contacts.isEmpty()) {
+                        System.out.println("No contacts available!");
+                        break;
+                    }
+
+                    System.out.print("Enter name to edit: ");
+                    String editName = sc.nextLine();
+
+                    Contact foundContact = null;
+
+                    for (Contact c : contacts) {
+                        if (c.getName().equalsIgnoreCase(editName)) {
+                            foundContact = c;
+                            break;
+                        }
+                    }
+
+                    if (foundContact == null) {
+                        System.out.println("Contact not found!");
+                        break;
+                    }
+
+                    // Show options
+                    System.out.println("1. Change Name");
+                    System.out.println("2. Add Phone");
+                    System.out.println("3. Add Email");
+                    System.out.print("Choose option: ");
+
+                    int editChoice = sc.nextInt();
+                    sc.nextLine();
+
+                    switch (editChoice) {
+
+                        case 1:
+                            System.out.print("Enter new name: ");
+                            foundContact.setName(sc.nextLine());
+                            System.out.println("Name updated!");
+                            break;
+
+                        case 2:
+                            System.out.print("Enter new phone: ");
+                            foundContact.addPhoneNumber(new PhoneNumber(sc.nextLine()));
+                            System.out.println("Phone added!");
+                            break;
+
+                        case 3:
+                            System.out.print("Enter new email: ");
+                            foundContact.addEmail(new Email(sc.nextLine()));
+                            System.out.println("Email added!");
+                            break;
+
+                        default:
+                            System.out.println("Invalid option!");
+                    }
+
+                    System.out.println("\nUpdated Contact:");
+                    foundContact.display();
+
+                    break;
+                	    
                 //Exit the process.
-                case 4: 
+                case 5: 
                 		System.out.println("Exiting...");
+                		System.out.println("ThankYou!!");
                 		return;
                 	    
                 default:
