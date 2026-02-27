@@ -54,47 +54,8 @@ Inheritance| "User → FreeUser / PremiumUser"
 Polymorphism| "display()" method override
 Abstraction| Base classes for User & Contact
 
-Project Structure:
 
-com.seveneleven.mycontact
-│
-├── user
-│   ├── Main.java
-│   ├── User.java
-│   ├── FreeUser.java
-│   ├── PremiumUser.java
-│   ├── UserProfile.java
-│
-├── auth
-│   └── BasicAuth.java
-│
-├── validation
-│   ├── EmailValidator.java
-│   └── PasswordValidator.java
-│
-├── contact
-│   ├── Contact.java
-│   ├── PersonContact.java
-│   ├── OrganizationContact.java
-│   ├── PhoneNumber.java
-│   └── Email.java
-
----
-Application Flow
-
-Register → Login → Menu Loop
-                      ↓
-        ┌──────────────────────────┐
-        │ 1. Profile Management    │
-        │ 2. Create Contact        │
-        │ 3. View Contact          │
-        │ 4. Edit Contact          │
-        │ 5. View All Contacts     │
-        │ 6. Delete Contact        │
-        │ 7. Exit                  │
-        └──────────────────────────┘
-
-Sample Output
+Sample Output:
 
 ===== MAIN MENU =====
 1. Profile Management
