@@ -107,7 +107,8 @@ public class Main {
             System.out.println("5. View all Contact");
             System.out.println("6. Delete Contact");
             System.out.println("7. Bulk Operations");
-            System.out.println("8. Exit");
+            System.out.println("8. Search Contacts");
+            System.out.println("9. Exit");
             System.out.print("Choose option: ");
 
             int mainChoice = sc.nextInt();
@@ -445,10 +446,86 @@ public class Main {
 
                     break;
                 
+                //Search Contact Feature
+                case 8:
+
+                    System.out.println("\nSEARCH CONTACTS");
+
+                    if (contacts.isEmpty()) {
+                        System.out.println("No contacts available!");
+                        break;
+                    }
+
+                    System.out.println("1. Search by Name");
+                    System.out.println("2. Search by Phone");
+                    System.out.println("3. Search by Email");
+                    System.out.print("Choose option: ");
+
+                    int searchChoice = sc.nextInt();
+                    sc.nextLine();
+
+                    boolean newfound = false;
+
+                    switch (searchChoice) {
+
+                        // for searching by using Name
+                        case 1:
+                            System.out.print("Enter name: ");
+                            String name = sc.nextLine();
+
+                            for (Contact c : contacts) {
+                                if (c.getName().equalsIgnoreCase(name)) {
+                                    c.display();
+                                    newfound = true;
+                                }
+                            }
+                            break;
+
+                        //for searching by using Phone number
+                        case 2:
+                            System.out.print("Enter phone: ");
+                            String phone = sc.nextLine();
+
+                            for (Contact c : contacts) {
+                                for (PhoneNumber p : c.getPhoneNumbers()) {
+                                    if (p.getNumber().contains(phone)) {
+                                        c.display();
+                                        found = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            break;
+
+                        //for searching by using Email
+                        case 3:
+                            System.out.print("Enter email: ");
+                            String searchemail = sc.nextLine();
+
+                            for (Contact c : contacts) {
+                                for (Email e : c.getEmails()) {
+                                    if (e.getEmail().contains(searchemail)) {
+                                        c.display();
+                                        found = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            break;
+
+                        default:
+                            System.out.println("Invalid option!");
+                    }
+
+                    if (!newfound) {
+                        System.out.println("No matching contacts found!");
+                    }
+
+                    break;
                 
                 	    
                 //Exit the process.
-                case 8: 
+                case 9: 
                 		System.out.println("Exiting...");
                 		System.out.println("ThankYou!!");
                 		return;
