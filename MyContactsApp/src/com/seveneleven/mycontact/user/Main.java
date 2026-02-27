@@ -6,6 +6,7 @@ import java.util.*;
 import com.seveneleven.mycontact.user.auth.BasicAuth;
 import com.seveneleven.mycontact.user.model.*;
 import com.seveneleven.mycontact.user.validation.*;
+import com.seveneleven.mycontact.contact.model.*;
 
 public class Main {
 
@@ -79,60 +80,123 @@ public class Main {
         	System.out.println("Invalid Credentials !");
         }
         
-        //UC3: Profile Management
+        
         
         if (loggedInUser != null) {
 
-            System.out.println("\nPROFILE MANAGEMENT");
-
-            System.out.println("1. Update Username");
-            System.out.println("2. Update Email");
-            System.out.println("3. Change Password");
+            System.out.println("\n---- MAIN MENU ----");
+            System.out.println("1. Profile Management");
+            System.out.println("2. Create Contact");
             System.out.print("Choose option: ");
 
-            int choice = sc.nextInt();
+            int mainChoice = sc.nextInt();
             sc.nextLine();
 
-            switch (choice) {
+            switch (mainChoice) {
 
+                // UC3 - Profile Management
                 case 1:
-                    System.out.print("Enter new username: ");
-                    String newUsername = sc.nextLine();
-                    loggedInUser.setUsername(newUsername);
-                    System.out.println("Username updated!");
+                    System.out.println("\nPROFILE MANAGEMENT");
+
+                    System.out.println("1. Update Username");
+                    System.out.println("2. Update Email");
+                    System.out.println("3. Change Password");
+                    System.out.print("Choose option: ");
+
+                    int choice = sc.nextInt();
+                    sc.nextLine();
+
+                    switch (choice) {
+
+                        case 1:
+                            System.out.print("Enter new username: ");
+                            String newUsername = sc.nextLine();
+                            loggedInUser.setUsername(newUsername);
+                            System.out.println("Username updated!");
+                            break;
+
+                        case 2:
+                            System.out.print("Enter new email: ");
+                            String newEmail = sc.nextLine();
+
+                            if (EmailValidator.isValid(newEmail)) {
+                                loggedInUser.setEmail(newEmail);
+                                System.out.println("Email updated!");
+                            } else {
+                                System.out.println("Invalid Email!");
+                            }
+                            break;
+
+                        case 3:
+                            System.out.print("Enter new password: ");
+                            String newPassword = sc.nextLine();
+
+                            if (PasswordValidator.isValid(newPassword)) {
+                                loggedInUser.setPassword(newPassword);
+                                System.out.println("Password changed!");
+                            } else {
+                                System.out.println("Weak Password!");
+                            }
+                            break;
+
+                        default:
+                            System.out.println("Invalid choice!");
+                    }
+
+                    System.out.println("\nUpdated Profile:");
+                    loggedInUser.display();
                     break;
 
+                // UC4 - Create Contact
                 case 2:
-                    System.out.print("Enter new email: ");
-                    String newEmail = sc.nextLine();
+                    System.out.println("\nCREATE CONTACT");
 
-                    if (EmailValidator.isValid(newEmail)) {
-                        loggedInUser.setEmail(newEmail);
-                        System.out.println("Email updated!");
+                    System.out.print("Enter contact type (person/org): ");
+                    String ctype = sc.nextLine();
+
+                    System.out.print("Enter name: ");
+                    String cname = sc.nextLine();
+
+                    Contact contact;
+
+                    if (ctype.equalsIgnoreCase("person")) {
+                        System.out.print("Enter nickname: ");
+                        String nickname = sc.nextLine();
+                        contact = new PersonContact(cname, nickname);
                     } else {
-                        System.out.println("Invalid Email!");
+                        System.out.print("Enter company name: ");
+                        String company = sc.nextLine();
+                        contact = new OrganizationContact(cname, company);
                     }
-                    break;
 
-                case 3:
-                    System.out.print("Enter new password: ");
-                    String newPassword = sc.nextLine();
+                    // Enter Contact phone numbers
+                    System.out.print("How many phone numbers? ");
+                    int pCount = sc.nextInt();
+                    sc.nextLine();
 
-                    if (PasswordValidator.isValid(newPassword)) {
-                        loggedInUser.setPassword(newPassword);
-                        System.out.println("Password changed!");
-                    } else {
-                        System.out.println("Weak Password!");
+                    for (int i = 0; i < pCount; i++) {
+                        System.out.print("Enter phone: ");
+                        String phone = sc.nextLine();
+                        contact.addPhoneNumber(new PhoneNumber(phone));
                     }
+
+                    // Enter Contact emails
+                    System.out.print("How many emails? ");
+                    int eCount = sc.nextInt();
+                    sc.nextLine();
+
+                    for (int i = 0; i < eCount; i++) {
+                        System.out.print("Enter email: ");
+                        String newEmail = sc.nextLine();
+                        contact.addEmail(new Email(newEmail));
+                    }
+
+                    contact.display();
                     break;
 
                 default:
-                    System.out.println("Invalid choice!");
+                    System.out.println("Invalid option!");
             }
-
-            // Show updated details
-            System.out.println("\nUpdated Profile:");
-            loggedInUser.display();
         }
     }
 }

@@ -1,0 +1,44 @@
+package com.seveneleven.mycontact.contact.model;
+
+import java.util.*;
+
+public abstract class Contact {
+
+    private String name;
+    private List<PhoneNumber> phoneNumbers;
+    private List<Email> emails;
+
+    public Contact(String name) {
+        this.name = name;
+        this.phoneNumbers = new ArrayList<>();
+        this.emails = new ArrayList<>();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void addPhoneNumber(PhoneNumber phone) {
+        phoneNumbers.add(phone);
+    }
+
+    public void addEmail(Email email) {
+        emails.add(email);
+    }
+
+    public void displayCommon() {
+        System.out.println("Name: " + name);
+
+        System.out.println("Phones:");
+        for (PhoneNumber p : phoneNumbers) {
+            System.out.println("- " + p.getNumber());
+        }
+
+        System.out.println("Emails:");
+        for (Email e : emails) {
+            System.out.println("- " + e.getEmail());
+        }
+    }
+
+    public abstract void display();
+}
