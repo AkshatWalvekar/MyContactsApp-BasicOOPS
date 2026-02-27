@@ -2,11 +2,23 @@ package com.seveneleven.mycontact.user;
 
 import java.util.Scanner;
 import java.util.*;
+import java.io.FileWriter;
 
 import com.seveneleven.mycontact.user.auth.BasicAuth;
 import com.seveneleven.mycontact.user.model.*;
 import com.seveneleven.mycontact.user.validation.*;
 import com.seveneleven.mycontact.contact.model.*;
+
+/*MyContactApp
+
+MyContactsApp is a console-based Java application that allows users to manage 
+their contacts efficiently. It demonstrates core OOP concepts like abstraction,
+encapsulation, inheritance, and polymorphism through real-world use cases.
+
+@author Developer
+@version 7.0
+
+*/
 
 public class Main {
 
@@ -94,7 +106,8 @@ public class Main {
             System.out.println("4. Edit Contact");
             System.out.println("5. View all Contact");
             System.out.println("6. Delete Contact");
-            System.out.println("7. Exit");
+            System.out.println("7. Bulk Operations");
+            System.out.println("8. Exit");
             System.out.print("Choose option: ");
 
             int mainChoice = sc.nextInt();
@@ -356,9 +369,86 @@ public class Main {
                     }
 
                     break;
+                    
+                case 7:
+
+                    System.out.println("\nBULK OPERATIONS");
+
+                    if (contacts.isEmpty()) {
+                        System.out.println("No contacts available!");
+                        break;
+                    }
+
+                    System.out.println("1. Delete Multiple Contacts");
+                    System.out.println("2. Export All Contacts");
+                    System.out.print("Choose option: ");
+
+                    int bulkChoice = sc.nextInt();
+                    sc.nextLine();
+
+                    switch (bulkChoice) {
+
+                        //Delete Multiple Contacts
+                        case 1:
+
+                            System.out.print("Enter names to delete (comma separated): ");
+                            String input = sc.nextLine();
+
+                            String[] names = input.split(",");
+
+                            for (String n : names) {
+                                n = n.trim();
+
+                                Contact toRemove = null;
+
+                                for (Contact c : contacts) {
+                                    if (c.getName().equalsIgnoreCase(n)) {
+                                        toRemove = c;
+                                        break;
+                                    }
+                                }
+
+                                if (toRemove != null) {
+                                    contacts.remove(toRemove);
+                                    System.out.println("Deleted: " + n);
+                                } else {
+                                    System.out.println("Not found: " + n);
+                                }
+                            }
+
+                            break;
+
+                        // Export contacts
+                        case 2:
+
+                            try {
+                                FileWriter writer = new FileWriter("contacts.txt");
+
+                                for (Contact c : contacts) {
+                                    writer.write("-----\n");
+                                    writer.write("Name: " + c.getName() + "\n");
+                                }
+
+                                writer.close();
+
+                                System.out.println("Contacts exported to contacts.txt");
+
+                            } catch (Exception e) {
+                                System.out.println("Error in exporting file");
+                            }
+
+                            break;
+
+                        default:
+                            System.out.println("Invalid option!");
+                    }
+
+                    break;
+                
+                
                 	    
                 //Exit the process.
-                case 7: 
+                case 8: 
                 		System.out.println("Exiting...");
                 		System.out.println("ThankYou!!");
                 		return;
