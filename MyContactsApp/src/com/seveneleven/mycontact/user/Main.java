@@ -17,6 +17,9 @@ public class Main {
         //Store Users
         List<User>users = new ArrayList<>();
         
+        //Store Contacts
+        List<Contact> contacts = new ArrayList<>();
+        
         //UC1: Registration
         System.out.print("Enter username: ");
         String username = sc.nextLine();
@@ -82,11 +85,13 @@ public class Main {
         
         
         
-        if (loggedInUser != null) {
+        while(true) {
 
             System.out.println("\n---- MAIN MENU ----");
             System.out.println("1. Profile Management");
             System.out.println("2. Create Contact");
+            System.out.println("3. View Contact");
+            System.out.println("4. Exit");
             System.out.print("Choose option: ");
 
             int mainChoice = sc.nextInt();
@@ -157,7 +162,7 @@ public class Main {
                     System.out.print("Enter name: ");
                     String cname = sc.nextLine();
 
-                    Contact contact;
+                    Contact contact = null;
 
                     if (ctype.equalsIgnoreCase("person")) {
                         System.out.print("Enter nickname: ");
@@ -190,12 +195,50 @@ public class Main {
                         String newEmail = sc.nextLine();
                         contact.addEmail(new Email(newEmail));
                     }
+                    
+                    contacts.add(contact);
 
                     contact.display();
                     break;
 
+                	
+                //UC5: View Contact
+                case 3:
+
+                	    System.out.println("\nVIEW CONTACT");
+
+                	    if (contacts.isEmpty()) {
+                	        System.out.println("No contacts available!");
+                	        break;
+                	    }
+
+                	    System.out.print("Enter name to search: ");
+                	    String searchName = sc.nextLine();
+
+                	    boolean found = false;
+
+                	    for (Contact c : contacts) {
+                	        if (c.getName().equalsIgnoreCase(searchName)) {
+                	            c.display();
+                	            found = true;
+                	            break;
+                	        }
+                	    }
+
+                	    if (!found) {
+                	        System.out.println("Contact not found!");
+                	    }
+
+                	    break;
+                	    
+                //Exit the process.
+                case 4: 
+                		System.out.println("Exiting...");
+                		return;
+                	    
                 default:
-                    System.out.println("Invalid option!");
+                		System.out.println("Invalid option!");
+                    
             }
         }
     }
