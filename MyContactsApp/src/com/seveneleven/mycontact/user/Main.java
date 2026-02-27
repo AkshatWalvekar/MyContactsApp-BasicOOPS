@@ -92,7 +92,9 @@ public class Main {
             System.out.println("2. Create Contact");
             System.out.println("3. View Contact");
             System.out.println("4. Edit Contact");
-            System.out.println("5. Exit");
+            System.out.println("5. View all Contact");
+            System.out.println("6. Delete Contact");
+            System.out.println("7. Exit");
             System.out.print("Choose option: ");
 
             int mainChoice = sc.nextInt();
@@ -296,9 +298,67 @@ public class Main {
                     foundContact.display();
 
                     break;
+                    
+                    
+                //View all contacts feature
+                case 5:
+
+                    System.out.println("\nALL CONTACTS");
+
+                    if (contacts.isEmpty()) {
+                        System.out.println("No contacts available!");
+                        break;
+                    }
+
+                    for (Contact c : contacts) {
+                        System.out.println("------------------");
+                        c.display();
+                    }
+
+                    break;
+                
+                    
+                //Delete Contact Feature
+                case 6:
+
+                    System.out.println("\nDELETE CONTACT");
+
+                    if (contacts.isEmpty()) {
+                        System.out.println("No contacts available!");
+                        break;
+                    }
+
+                    System.out.print("Enter name to delete: ");
+                    String deleteName = sc.nextLine();
+
+                    Contact contactToDelete = null;
+
+                    for (Contact c : contacts) {
+                        if (c.getName().equalsIgnoreCase(deleteName)) {
+                            contactToDelete = c;
+                            break;
+                        }
+                    }
+
+                    if (contactToDelete == null) {
+                        System.out.println("Contact not found!");
+                        break;
+                    }
+
+                    System.out.print("Are you sure you want to delete? (Y/N): ");
+                    String confirm = sc.nextLine();
+
+                    if (confirm.equalsIgnoreCase("Y")) {
+                        contacts.remove(contactToDelete);
+                        System.out.println("Contact deleted!");
+                    } else {
+                        System.out.println("Deletion cancelled.");
+                    }
+
+                    break;
                 	    
                 //Exit the process.
-                case 5: 
+                case 7: 
                 		System.out.println("Exiting...");
                 		System.out.println("ThankYou!!");
                 		return;
