@@ -1,0 +1,114 @@
+MyContactsApp (Java OOP Project)
+
+Overview:
+
+MyContactsApp is a console-based Java application that allows users to manage their contacts efficiently.
+It demonstrates core OOP concepts like abstraction, encapsulation, inheritance, and polymorphism through real-world use cases.
+
+Features (Use Cases)
+
+UC1: User Registration
+
+- Create a new user (Free / Premium)
+- Email & password validation
+
+UC2: User Authentication
+
+- Login using username & password
+- Basic authentication
+
+UC3: Profile Management
+
+- Update username
+- Update email
+- Change password
+
+UC4: Create Contact
+
+- Add Person / Organization contact
+- Multiple phone numbers & emails
+
+UC5: View Contact
+
+- Search contact by name
+- Display details
+
+UC6: Edit Contact
+
+- Modify name
+- Add phone/email
+
+UC7: Delete Contact
+
+- Delete contact by name
+- Confirmation (Y/N)
+
+UC8: View All Contacts
+
+- Display all saved contacts
+
+OOP Concepts Used:
+
+Encapsulation| Private fields + getters/setters
+Inheritance| "User → FreeUser / PremiumUser"
+Polymorphism| "display()" method override
+Abstraction| Base classes for User & Contact
+
+Project Structure:
+
+com.seveneleven.mycontact
+│
+├── user
+│   ├── Main.java
+│   ├── User.java
+│   ├── FreeUser.java
+│   ├── PremiumUser.java
+│   ├── UserProfile.java
+│
+├── auth
+│   └── BasicAuth.java
+│
+├── validation
+│   ├── EmailValidator.java
+│   └── PasswordValidator.java
+│
+├── contact
+│   ├── Contact.java
+│   ├── PersonContact.java
+│   ├── OrganizationContact.java
+│   ├── PhoneNumber.java
+│   └── Email.java
+
+---
+Application Flow
+
+Register → Login → Menu Loop
+                      ↓
+        ┌──────────────────────────┐
+        │ 1. Profile Management    │
+        │ 2. Create Contact        │
+        │ 3. View Contact          │
+        │ 4. Edit Contact          │
+        │ 5. View All Contacts     │
+        │ 6. Delete Contact        │
+        │ 7. Exit                  │
+        └──────────────────────────┘
+
+Sample Output
+
+===== MAIN MENU =====
+1. Profile Management
+2. Create Contact
+3. View Contact
+4. Edit Contact
+5. View All Contacts
+6. Delete Contact
+7. Exit
+
+---
+Technologies Used
+
+- Java (JDK 17+)
+- OOP Principles
+- Collections (ArrayList)
+- Scanner (Input handling)
