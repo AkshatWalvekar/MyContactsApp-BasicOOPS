@@ -13,6 +13,14 @@ public abstract class Contact {
         this.phoneNumbers = new ArrayList<>();
         this.emails = new ArrayList<>();
     }
+    
+    public List<PhoneNumber>getPhoneNumbers(){
+    	return phoneNumbers;
+    }
+    
+    public List<Email>getEmails(){
+    	return emails;
+    }
 
     public String getName() {
         return name;
