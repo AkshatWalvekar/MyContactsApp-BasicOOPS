@@ -10,37 +10,47 @@ UC1: User Registration
 
 Create a new user (Free / Premium)
 Email & password validation
+
 UC2: User Authentication
 
 Login using username & password
 Basic authentication
+
 UC3: Profile Management
 
 Update username
 Update email
 Change password
+
 UC4: Create Contact
 
 Add Person / Organization contact
 Multiple phone numbers & emails
+
 UC5: View Contact
 
 Search contact by name
 Display details
+
 UC6: Edit Contact
 
 Modify name
 Add phone/email
+
 UC7: Delete Contact
 
 Delete contact by name
 Confirmation (Y/N)
+
 UC8: View All Contacts
 
 Display all saved contacts
 OOP Concepts Used:
 
-Encapsulation| Private fields + getters/setters Inheritance| "User → FreeUser / PremiumUser" Polymorphism| "display()" method override Abstraction| Base classes for User & Contact
+Encapsulation| Private fields + getters/setters 
+Inheritance| "User → FreeUser / PremiumUser" 
+Polymorphism| "display()" method override 
+Abstraction| Base classes for User & Contact
 
 Sample Output:
 
