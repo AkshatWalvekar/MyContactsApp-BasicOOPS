@@ -108,7 +108,8 @@ public class Main {
             System.out.println("6. Delete Contact");
             System.out.println("7. Bulk Operations");
             System.out.println("8. Search Contacts");
-            System.out.println("9. Exit");
+            System.out.println("9. FilterContacts");
+            System.out.println("10. Exit");
             System.out.print("Choose option: ");
 
             int mainChoice = sc.nextInt();
@@ -523,9 +524,68 @@ public class Main {
 
                     break;
                 
-                	    
+                //filtering feature
+                case 9:
+
+                    System.out.println("\nFILTER CONTACTS");
+
+                    if (contacts.isEmpty()) {
+                        System.out.println("No contacts available!");
+                        break;
+                    }
+
+                    System.out.println("1. Filter by Name (starts with)");
+                    System.out.println("2. Sort by Name");
+                    System.out.print("Choose option: ");
+
+                    int filterChoice = sc.nextInt();
+                    sc.nextLine();
+
+                    switch (filterChoice) {
+
+                        // FILTER BY NAME
+                        case 1:
+                            System.out.print("Enter starting letter: ");
+                            String prefix = sc.nextLine();
+
+                            boolean nfound = false;
+
+                            for (Contact c : contacts) {
+                                if (c.getName().toLowerCase().startsWith(prefix.toLowerCase())) {
+                                    c.display();
+                                    nfound = true;
+                                }
+                            }
+
+                            if (!nfound) {
+                                System.out.println("❌ No matching contacts!");
+                            }
+
+                            break;
+
+                        // SORT BY NAME
+                        case 2:
+
+                            Collections.sort(contacts, (c1, c2) ->
+                                c1.getName().compareToIgnoreCase(c2.getName())
+                            );
+
+                            System.out.println("Contacts sorted by name:");
+
+                            for (Contact c : contacts) {
+                                c.display();
+                            }
+
+                            break;
+
+                        default:
+                            System.out.println("Invalid option!");
+                    }
+
+                    break;
+                    
                 //Exit the process.
-                case 9: 
+                case 10: 
                 		System.out.println("Exiting...");
                 		System.out.println("ThankYou!!");
                 		return;
