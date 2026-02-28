@@ -3,6 +3,8 @@ package com.seveneleven.mycontact.user;
 import java.util.Scanner;
 import java.util.*;
 import java.io.FileWriter;
+import java.util.Set;
+import java.util.HashSet;
 
 import com.seveneleven.mycontact.user.auth.BasicAuth;
 import com.seveneleven.mycontact.user.model.*;
@@ -28,6 +30,9 @@ public class Main {
         
         //Store Users
         List<User>users = new ArrayList<>();
+        
+        //Store tags
+        Set<Tag> tags = new HashSet<>();
         
         //Store Contacts
         List<Contact> contacts = new ArrayList<>();
@@ -109,7 +114,8 @@ public class Main {
             System.out.println("7. Bulk Operations");
             System.out.println("8. Search Contacts");
             System.out.println("9. FilterContacts");
-            System.out.println("10. Exit");
+            System.out.println("10. Create and Manage Tags");
+            System.out.println("11. Exit");
             System.out.print("Choose option: ");
 
             int mainChoice = sc.nextInt();
@@ -583,9 +589,72 @@ public class Main {
                     }
 
                     break;
+                
+                //UC11 : for creating and managing tags
+                case 10:
+
+                    System.out.println("\nTAG MANAGEMENT");
+
+                    System.out.println("1. Add Tag");
+                    System.out.println("2. View Tags");
+                    System.out.println("3. Delete Tag");
+                    System.out.print("Choose option: ");
+
+                    int tagChoice = sc.nextInt();
+                    sc.nextLine();
+
+                    switch (tagChoice) {
+
+                        // Add Tags
+                        case 1:
+                            System.out.print("Enter tag name: ");
+                            String tagName = sc.nextLine();
+
+                            Tag newTag = new Tag(tagName);
+
+                            if (tags.add(newTag)) {
+                                System.out.println("Tag added!");
+                            } else {
+                                System.out.println("Tag already exists!");
+                            }
+
+                            break;
+
+                        // View Tags
+                        case 2:
+                            if (tags.isEmpty()) {
+                                System.out.println("No tags available!");
+                            } else {
+                                System.out.println("Available Tags:");
+                                for (Tag t : tags) {
+                                    System.out.println("- " + t.getName());
+                                }
+                            }
+                            break;
+
+                        //Delete Tags
+                        case 3:
+                            System.out.print("Enter tag to delete: ");
+                            String delTag = sc.nextLine();
+
+                            Tag removeTag = new Tag(delTag);
+
+                            if (tags.remove(removeTag)) {
+                                System.out.println("Tag removed!");
+                            } else {
+                                System.out.println("Tag not found!");
+                            }
+
+                            break;
+
+                        default:
+                            System.out.println("Invalid option!");
+                    }
+
+                    break;
                     
                 //Exit the process.
-                case 10: 
+                case 11: 
                 		System.out.println("Exiting...");
                 		System.out.println("ThankYou!!");
                 		return;
