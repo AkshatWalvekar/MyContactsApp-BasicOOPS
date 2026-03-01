@@ -8,7 +8,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.ArrayList;
 
-
 import com.seveneleven.mycontact.user.auth.BasicAuth;
 import com.seveneleven.mycontact.user.model.*;
 import com.seveneleven.mycontact.user.validation.*;
