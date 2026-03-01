@@ -14,6 +14,7 @@ import com.seveneleven.mycontact.user.model.*;
 import com.seveneleven.mycontact.user.validation.*;
 import com.seveneleven.mycontact.contact.model.*;
 
+
 /*MyContactApp
 
 MyContactsApp is a console-based Java application that allows users to manage 
