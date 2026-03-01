@@ -5,6 +5,9 @@ import java.util.*;
 import java.io.FileWriter;
 import java.util.Set;
 import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
+
 
 import com.seveneleven.mycontact.user.auth.BasicAuth;
 import com.seveneleven.mycontact.user.model.*;
@@ -32,10 +35,13 @@ public class Main {
         List<User>users = new ArrayList<>();
         
         //Store tags
-        Set<Tag> tags = new HashSet<>();
+        List<Tag> tags = new ArrayList<>();
         
         //Store Contacts
         List<Contact> contacts = new ArrayList<>();
+        
+        //global tag list
+        List<Tag> gtags = new ArrayList<>();
         
         //UC1: Registration
         System.out.print("Enter username: ");
@@ -611,12 +617,11 @@ public class Main {
                             String tagName = sc.nextLine();
 
                             Tag newTag = new Tag(tagName);
+                            tags.add(newTag);
 
-                            if (tags.add(newTag)) {
-                                System.out.println("Tag added!");
-                            } else {
-                                System.out.println("Tag already exists!");
-                            }
+                            
+                            System.out.println("Tag added!");
+                            
 
                             break;
 
@@ -653,8 +658,64 @@ public class Main {
 
                     break;
                     
+                //Assign Tags to Contacts
+                case 11:
+
+                    System.out.println("\nAPPLY TAG TO CONTACT");
+
+                    if (contacts.isEmpty()) {
+                        System.out.println("No contacts available!");
+                        break;
+                    }
+
+                    if (tags.isEmpty()) {
+                        System.out.println("No tags created! Please create tags first.");
+                        break;
+                    }
+
+                    // Show Contacts
+                    System.out.println("Available Contacts:");
+                    for (int i = 0; i < contacts.size(); i++) {
+                        System.out.println((i + 1) + ". " + contacts.get(i).getName());
+                    }
+
+                    System.out.print("Select contact (number): ");
+                    int contactIndex = sc.nextInt() - 1;
+                    sc.nextLine();
+
+                    if (contactIndex < 0 || contactIndex >= contacts.size()) {
+                        System.out.println("Invalid contact!");
+                        break;
+                    }
+
+                    Contact selectedContact = contacts.get(contactIndex);
+
+                    // Show tags (from UC11)
+                    System.out.println("Available Tags:");
+                    for (int i = 0; i < tags.size(); i++) {
+                        System.out.println((i + 1) + ". " + tags.get(i).getName());
+                    }
+
+                    System.out.print("Select tag (number): ");
+                    int tagIndex = sc.nextInt() - 1;
+                    sc.nextLine();
+
+                    if (tagIndex < 0 || tagIndex >= tags.size()) {
+                        System.out.println("Invalid tag!");
+                        break;
+                    }
+
+                    Tag selectedTag = tags.get(tagIndex);
+
+                    // Assign Tag
+                    selectedContact.addTag(selectedTag);
+
+                    System.out.println("Tag assigned successfully!");
+
+                    break;
+                    
                 //Exit the process.
-                case 11: 
+                case 12: 
                 		System.out.println("Exiting...");
                 		System.out.println("ThankYou!!");
                 		return;

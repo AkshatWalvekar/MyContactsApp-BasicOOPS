@@ -7,6 +7,7 @@ public abstract class Contact {
     private String name;
     private List<PhoneNumber> phoneNumbers;
     private List<Email> emails;
+    private List<Tag>tags = new ArrayList<>();
 
     public Contact(String name) {
         this.name = name;
@@ -36,6 +37,10 @@ public abstract class Contact {
 
     public void addEmail(Email email) {
         emails.add(email);
+    }
+    
+    public void addTag(Tag tag) {
+    	tags.add(tag);
     }
 
     public void displayCommon() {
