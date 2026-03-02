@@ -47,6 +47,25 @@ UC8: View All Contacts
 
 - Display all saved contacts
 
+UC9: Search Contacts
+
+- Search Contacts by Name
+- Search Contacts by Email
+- Search Contacts by Phone
+
+UC10: Implemented Filter Feature
+
+- Filters Contacts by Name (starting letter)
+
+UC11: Create and Manage Tags
+
+- Create Tags
+- Manage Tags
+
+UC12: Apply Tags to Contacts
+
+- Applying tags to contacts
+
 OOP Concepts Used:
 
 Encapsulation| Private fields + getters/setters
